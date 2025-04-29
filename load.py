@@ -60,7 +60,8 @@ def read_referee_data():
         f"postgresql://{user}:{password}@{host}:{port}/{database}")
 
     with engine.connect() as conn:
-        df = pd.read_sql("SELECT * FROM referees;", con=engine)
+        df = pd.read_sql(
+            "SELECT referee_name, avg_yellow_cards, avg_red_cards FROM referees;", con=engine)
 
         return df
 
