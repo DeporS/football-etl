@@ -1,6 +1,10 @@
-from extract import extract_csv_to_dataframe
+from extract.extract import extract_csv_to_dataframe
 from transform import transform_data
 from load import load_data_to_referees, read_referee_data
+from extract.fetch_leagues import fetch_leagues
+from extract.fetch_fixtures import fetch_fixtures
+from extract.fetch_standings import fetch_standings
+
 
 def referees_etl():
     """etl that reads data from csv provided, transformes it, 
@@ -10,6 +14,12 @@ def referees_etl():
     transformed_data = transform_data(extracted_data)
     load_data_to_referees(transformed_data)
     print(read_referee_data())
+
+def api_sports_etl(league: int, season: int):
+    fetch_leagues()
+    fetch_fixtures()
+    fetch_standings()
+
 
 def main():
 

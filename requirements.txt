@@ -1,1 +1,1 @@
-psycopg2 sqlalchemy pandas
+psycopg2 sqlalchemy pandas dotenv requests
