@@ -1,6 +1,9 @@
 import pandas as pd
 import json
 
+pd.set_option('display.max_columns', None)
+
+
 def load_raw_json(filepath: str) -> dict:
     with open(filepath, "r") as f:
         return json.load(f)
@@ -27,8 +30,17 @@ def transform_standings(raw_data: dict) -> pd.DataFrame:
         standing_teams.append(team_info)
     
     df = pd.DataFrame(standing_teams)
+
+    # additional transformations
+    df['points_per_game'] = (df['points'] / (df['wins'] + df['draws'] + df['loses'])).round(2)
+    df['goal_difference'] = df['goals_scored'] - df['goals_conceded']
+
     return df
 
 
-data = load_raw_json("data/raw/standings_39_2023.json")
-print(transform_standings(data))
+# data = load_raw_json("data/raw/standings_39_2023.json")
+# print(transform_standings(data))
+
+def transform_fixtures():
+
+    return

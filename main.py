@@ -1,5 +1,5 @@
 from extract.extract import extract_csv_to_dataframe
-from transform import transform_data
+from transform.transform import transform_data
 from load import load_data_to_referees, read_referee_data
 from extract.fetch_leagues import fetch_leagues
 from extract.fetch_fixtures import fetch_fixtures
@@ -15,10 +15,10 @@ def referees_etl():
     load_data_to_referees(transformed_data)
     print(read_referee_data())
 
-def api_sports_etl(league: int, season: int):
+def api_sports_etl(league_id: int, season: int):
     fetch_leagues()
-    fetch_fixtures()
-    fetch_standings()
+    fetch_fixtures(league_id, season)
+    fetch_standings(league_id, season)
 
 
 def main():
