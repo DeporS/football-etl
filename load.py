@@ -11,7 +11,7 @@ password = "mysecretpassword"
 
 
 def create_tables():
-    """Create tables in the PostgreSQL daatabase"""
+    """Create tables in the PostgreSQL database"""
     engine = create_engine(
         f"postgresql://{user}:{password}@{host}:{port}/{database}")
 
