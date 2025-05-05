@@ -44,5 +44,6 @@ def transform_fixtures(raw_data: dict) -> pd.DataFrame:
         and row["home_halftime_outcome"] != row["home_outcome"],
         axis=1
     )
+    df["referee"] = df["referee"].str.replace(".", "", regex=False)
 
     return df

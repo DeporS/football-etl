@@ -51,6 +51,7 @@ def api_sports_etl(league_id: int, season: int):
 
 def main():
     api_sports_etl(39, 2023)
+    # referees_etl()
     return
 
 

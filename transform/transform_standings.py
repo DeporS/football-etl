@@ -13,6 +13,7 @@ def transform_standings(raw_data: dict) -> pd.DataFrame:
     standing_teams = []
     for team in standings_data:
         team_info = {
+            "league": raw_data["response"][0]["league"]["name"],
             "rank": team["rank"],
             "team": team["team"]["name"],
             "points": team["points"],
