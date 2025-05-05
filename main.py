@@ -7,6 +7,7 @@ from extract.fetch_standings import fetch_standings
 from transform.transform_leagues import transform_leagues
 from transform.transform_fixtures import transform_fixtures
 from transform.transform_standings import transform_standings
+from database_manager import create_tables
 import os
 import json
 
@@ -50,8 +51,9 @@ def api_sports_etl(league_id: int, season: int):
 
 
 def main():
-    api_sports_etl(39, 2023)
+    # api_sports_etl(39, 2023)
     # referees_etl()
+    # create_tables()
     return
 
 

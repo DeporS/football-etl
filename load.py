@@ -10,31 +10,6 @@ user = "postgres"
 password = "mysecretpassword"
 
 
-def create_tables():
-    """Create tables in the PostgreSQL database"""
-    engine = create_engine(
-        f"postgresql://{user}:{password}@{host}:{port}/{database}")
-
-    commands = (
-        """
-        CREATE TABLE IF NOT EXISTS referees (
-            referee_id SERIAL PRIMARY KEY,
-            referee_name VARCHAR(255) NOT NULL,
-            avg_yellow_cards DOUBLE PRECISION NOT NULL,
-            avg_red_cards DOUBLE PRECISION NOT NULL
-        )
-        """,
-    )
-
-    try:
-        with engine.connect() as conn:
-            for command in commands:
-                conn.execute(text(command))
-        print("Tables have been created successfully")
-    except Exception as e:
-        print(f"Exception while creating tables: {e}")
-
-
 def test():
     """Testing function"""
     engine = create_engine(
