@@ -25,7 +25,7 @@ def fetch_fixtures(league_id: int, season: int):
         os.makedirs("data/raw", exist_ok=True)
         with open(f"data/raw/fixtures_{league_id}_{season}.json", "w") as f:
             json.dump(data, f, indent=2)
-        print("Data saved to leagues.json")
+        print(f"Data saved to fixtures_{league_id}_{season}.json")
     else:
         print(f"Error {response.status_code}: {response.text}")
 
