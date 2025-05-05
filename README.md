@@ -20,4 +20,6 @@ In main we can launch ETL processes.
 - **Transform (T) -**
 - **Load (L) -**
 
-### [Database Structure](database_struct.png)
+## Database Structure
+
+![Database Structure](database_struct.png)
