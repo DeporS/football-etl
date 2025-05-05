@@ -17,7 +17,7 @@ In main we can launch ETL processes.
 ### `api_sports_etl`
 
 - **Extract (E) -** Extracting data from API endpoints using the functions `fetch_leagues`, `fetch_standings` and `fetch_fixtures`
-- **Transform (T) -**
+- **Transform (T) -** Transforming raw data from `.json` files into structured DataFrames, preparing them to loading into the database using functions `transform_leagues`, `transform_standings` and `transform_fixtures`
 - **Load (L) -**
 
 ## Database Structure
