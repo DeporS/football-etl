@@ -11,8 +11,8 @@ In main we can launch ETL processes.
 ### `referees_etl`
 
 - **Extract (E) -** Extracting data from csv file
-- **Transform (T) -** Applying transformations to calculate average yellow and red cards between referees
-- **Load (L) -** Loading the transformed data into a PostgreSQL database (running in Docker)
+- **Transform (T) -** Applying transformations to calculate average yellow and red cards between referees in `transform_referees_data` function
+- **Load (L) -** Loading the transformed data into a `referees` table in PostgreSQL database (running in Docker) using `load_data_to_referees` function
 
 ### `api_sports_etl`
 

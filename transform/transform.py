@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def transform_data(data: pd.DataFrame):
+def transform_referees_data(data: pd.DataFrame):
     referees = data.groupby('Referee').agg({
         'HY': 'mean',
         'AY': 'mean',

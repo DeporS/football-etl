@@ -10,6 +10,19 @@ user = "postgres"
 password = "mysecretpassword"
 
 
+def test_database():
+    """Testing function"""
+    engine = create_engine(
+        f"postgresql://{user}:{password}@{host}:{port}/{database}")
+
+    with engine.connect() as conn:
+        result = conn.execute(text(
+            "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';"
+        ))
+        tables = [row[0] for row in result]
+        print("Tables in db: ", tables)
+
+
 def create_tables():
     """Create tables in the PostgreSQL database"""
     engine = create_engine(
@@ -95,7 +108,7 @@ def create_tables():
             home_outcome VARCHAR(10) CHECK (home_outcome IN ('win', 'draw', 'lose')),
             home_halftime_outcome VARCHAR(10) CHECK (home_halftime_outcome IN ('win', 'draw', 'lose')),
             reversed_result BOOLEAN NOT NULL,
-            referee_id INTEGER NOT NULL REFERENCES referees(referee_id)
+            referee_id INTEGER REFERENCES referees(referee_id)
                 ON DELETE SET NULL ON UPDATE CASCADE
         )
         """
@@ -106,6 +119,19 @@ def create_tables():
         with engine.connect() as conn:
             for command in commands:
                 conn.execute(text(command))
+            conn.commit()
         print("Tables have been created successfully")
     except Exception as e:
         print(f"Exception while creating tables: {e}")
+
+
+def read_referee_data():
+    """Reading referee data from db"""
+    engine = create_engine(
+        f"postgresql://{user}:{password}@{host}:{port}/{database}")
+
+    with engine.connect() as conn:
+        df = pd.read_sql(
+            "SELECT referee_name, avg_yellow_cards, avg_red_cards FROM referees;", con=engine)
+
+        return df

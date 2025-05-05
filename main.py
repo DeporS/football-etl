@@ -1,13 +1,13 @@
 from extract.extract import extract_csv_to_dataframe, load_raw_json
-from transform.transform import transform_data
-from load import load_data_to_referees, read_referee_data
+from transform.transform import transform_referees_data
+from load_referees import load_data_to_referees
 from extract.fetch_leagues import fetch_leagues
 from extract.fetch_fixtures import fetch_fixtures
 from extract.fetch_standings import fetch_standings
 from transform.transform_leagues import transform_leagues
 from transform.transform_fixtures import transform_fixtures
 from transform.transform_standings import transform_standings
-from database_manager import create_tables
+from database_manager import create_tables, read_referee_data, test_database
 import os
 import json
 
@@ -17,7 +17,7 @@ def referees_etl():
     selecting only referees and their stats, 
     and loads it into PostgreSQL referees table"""
     extracted_data = extract_csv_to_dataframe('data/E0.csv')
-    transformed_data = transform_data(extracted_data)
+    transformed_data = transform_referees_data(extracted_data)
     load_data_to_referees(transformed_data)
     print(read_referee_data())
 
@@ -53,7 +53,8 @@ def api_sports_etl(league_id: int, season: int):
 def main():
     # api_sports_etl(39, 2023)
     # referees_etl()
-    # create_tables()
+    create_tables()
+    test_database()
     return
 
 
