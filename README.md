@@ -23,3 +23,33 @@ In main we can launch ETL processes.
 ## Database Structure
 
 ![Database Structure](database_struct.png)
+
+## Setup
+
+### Prerequisites
+
+- Python 3.8+
+- PostgreSQL (can be run with Docker)
+- Docker and Docker Compose (if using containerized DB)
+
+### Installation
+
+- Create and activate a virtual environment:
+
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+- Install dependencies:
+
+pip install -r requirements.txt
+
+### Running the ETL
+
+- Make sure the PostgreSQL database is running. Then run:
+
+python main.py
+
+- Make sure to set `API_KEY` from https://www.api-football.com/ in `.env` file.
+
+API_KEY=XXX
+
