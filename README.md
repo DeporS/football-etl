@@ -4,9 +4,9 @@ Extracting, Transforming and Loading football data in Python.
 
 ## Project Structure
 
-### `main.py`
+### `main`
 
-In main we can launch ETL processes.
+In `main.py` we can launch ETL processes.
 
 ### `referees_etl`
 
