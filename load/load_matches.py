@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, text
 import pandas as pd
-from config.db_config import get_engine
+from load.config.db_config import get_engine
 
 
 def load_data_to_matches(data: pd.DataFrame, season: int, table_name: str = "matches") -> int:
@@ -38,4 +38,4 @@ def load_data_to_matches(data: pd.DataFrame, season: int, table_name: str = "mat
 
     return competition_season_id
 
-print(load_data_to_matches(pd.read_csv("data/transformed/transformed_fixtures.csv"), 2023))
+# print(load_data_to_matches(pd.read_csv("data/transformed/transformed_fixtures.csv"), 2023))

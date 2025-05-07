@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, text
 import pandas as pd
-from config.db_config import get_engine
+from load.config.db_config import get_engine
 
 
 def load_data_to_competitions(data: pd.DataFrame, table_name: str = "competitions"):
@@ -19,4 +19,4 @@ def load_data_to_competitions(data: pd.DataFrame, table_name: str = "competition
                     index=False, method='multi')  # insert data from DataFrame
 
 
-load_data_to_competitions(pd.read_csv("data/transformed/transformed_leagues.csv"))
+# load_data_to_competitions(pd.read_csv("data/transformed/transformed_leagues.csv"))

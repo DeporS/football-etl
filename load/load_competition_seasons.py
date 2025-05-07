@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, text
 import pandas as pd
-from config.db_config import get_engine
+from load.config.db_config import get_engine
 
 
 def load_data_to_competition_seasons(data: pd.DataFrame, table_name: str = "competition_seasons"):

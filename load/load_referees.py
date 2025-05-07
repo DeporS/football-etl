@@ -7,10 +7,12 @@ def load_data_to_referees(data: pd.DataFrame, table_name: str = "referees"):
     """Loading referee data into a table"""
     engine = get_engine()
 
-    with engine.connect().execution_options(isolation_level="AUTOCOMMIT") as conn:
-        conn.execute(text("TRUNCATE TABLE referees"))  # clear table
+    df = data[["referee_name", "avg_yellow_cards", "avg_red_cards"]]
 
-        data.to_sql(table_name, con=engine, if_exists='append',
+    with engine.connect().execution_options(isolation_level="AUTOCOMMIT") as conn:
+        conn.execute(text(f"TRUNCATE TABLE {table_name} CASCADE"))  # clear table
+
+        df.to_sql(table_name, con=engine, if_exists='append',
                     index=False, method='multi')  # insert data from DataFrame
 
 

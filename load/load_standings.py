@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, text
 import pandas as pd
-from config.db_config import get_engine
+from load.config.db_config import get_engine
 
 
 def load_data_to_standings(data: pd.DataFrame, season: int, table_name: str = "standings") -> int:
@@ -48,6 +48,11 @@ def load_data_to_standings(data: pd.DataFrame, season: int, table_name: str = "s
             {"competition_season_id": competition_season_id}
         )
 
-    return competition_season_id
+        standing_id = conn.execute(
+                text(f"SELECT standing_id FROM {table_name} WHERE competition_season_id = :competition_season_id"),
+                {"competition_season_id": competition_season_id}
+            ).fetchone()
+        
+    return standing_id[0]
 
 # print(load_data_to_standings(pd.read_csv("data/transformed/transformed_standings.csv"), 2023))

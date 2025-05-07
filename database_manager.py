@@ -21,7 +21,9 @@ def test_database():
 
     with engine.connect() as conn:
         result = conn.execute(text(
-            "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';"
+            """SELECT conname
+                FROM pg_constraint
+                WHERE conrelid = 'match_stats'::regclass AND contype = 'f';"""
         ))
         tables = [row[0] for row in result]
         print("Tables in db: ", tables)
@@ -102,8 +104,8 @@ def create_tables():
         """,
         """
         CREATE TABLE IF NOT EXISTS match_stats (
-            match_id INTEGER PRIMARY KEY REFERENCES matches(match_id)
-                ON DELETE CASCADE ON UPDATE CASCADE,
+            match_id INTEGER PRIMARY KEY,
+            FOREIGN KEY (match_id) REFERENCES matches(match_id) ON DELETE CASCADE,
             goals_home INTEGER NOT NULL,
             goals_away INTEGER NOT NULL,
             home_outcome VARCHAR(10) CHECK (home_outcome IN ('win', 'draw', 'lose')),
@@ -136,6 +138,19 @@ def drop_table(table: str):
         print(f"Table {table} have been dropped!")
     except Exception as e:
         print(f"Exception while dropping table: {e}")
+
+
+def truncate_table(table: str):
+    """This function deletes all data from the given tablet"""
+    engine = get_engine()
+
+    try:
+        with engine.connect() as conn:
+            conn.execute(text(f"TRUNCATE TABLE {table} CASCADE"))
+            conn.commit()
+        print(f"Table {table} has been truncated!")
+    except Exception as e:
+        print(f"Exception while truncating table: {e}")
 
 
 def read_referee_data():
@@ -211,10 +226,25 @@ def read_matches():
         )
 
         return df
+    
+def read_match_stats():
+    """Reads match stats data from db"""
+    engine = get_engine()
 
-print(read_competitions_data())    
-print(read_competition_seasons_data())
-print(read_standings())
-print(read_teams())
-print(read_team_stats())
-print(read_matches())
+    with engine.connect() as conn:
+        df = pd.read_sql(
+            "SELECT * FROM match_stats", con=engine
+        )
+
+        return df
+
+# truncate_table("competitions")
+
+def read_all_tables():
+    print(read_competitions_data())    
+    print(read_competition_seasons_data())
+    print(read_standings())
+    print(read_teams())
+    print(read_team_stats())
+    print(read_matches())
+    print(read_match_stats())

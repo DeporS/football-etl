@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, text
 import pandas as pd
-from config.db_config import get_engine
+from load.config.db_config import get_engine
 
 
 def get_team_id(row, standing_id, conn):
