@@ -200,9 +200,21 @@ def read_team_stats():
         )
 
         return df
+    
+def read_matches():
+    """Reads matches data from db"""
+    engine = get_engine()
+
+    with engine.connect() as conn:
+        df = pd.read_sql(
+            "SELECT * FROM matches", con=engine
+        )
+
+        return df
 
 print(read_competitions_data())    
 print(read_competition_seasons_data())
 print(read_standings())
 print(read_teams())
 print(read_team_stats())
+print(read_matches())

@@ -18,6 +18,7 @@ def transform_fixtures(raw_data: dict) -> pd.DataFrame:
         
         fixture_info = {
             "league": fixture["league"]["name"],
+            "country": fixture["league"]["country"],
             "date_utc": dt.strftime("%Y-%m-%d %H:%M:%S"),
             # "year": dt.year,
             # "month": dt.month,
