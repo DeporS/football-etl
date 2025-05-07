@@ -3,7 +3,7 @@ import pandas as pd
 from config.db_config import get_engine
 
 
-def load_data_to_standings(data: pd.DataFrame, season: int, table_name: str = "standings"):
+def load_data_to_standings(data: pd.DataFrame, season: int, table_name: str = "standings") -> int:
     """Loading standings data into a table"""
     engine = get_engine()
 
@@ -25,14 +25,29 @@ def load_data_to_standings(data: pd.DataFrame, season: int, table_name: str = "s
 
     competition_season_id = int(df_competitions["competition_season_id"].iloc[0])
 
-    upsert_sql = text("""
-        INSERT INTO standings (competition_season_id)
-        VALUES (:competition_season_id)
-        ON CONFLICT (competition_season_id)
-        DO UPDATE SET standing_id = EXCLUDED.standing_id
-    """)
-
     with engine.begin() as conn:
-        conn.execute(upsert_sql, {"competition_season_id": competition_season_id})
+        # Check if record with competition_season_id already exists
+        result = conn.execute(
+            text(f"SELECT 1 FROM {table_name} WHERE competition_season_id = :competition_season_id"),
+            {"competition_season_id": competition_season_id}
+        ).fetchone()
 
-load_data_to_standings(pd.read_csv("data/transformed/transformed_standings.csv"), 2023)
+        if result:
+            # Remove if exists
+            conn.execute(
+                text(f"DELETE FROM {table_name} WHERE competition_season_id = :competition_season_id"),
+                {"competition_season_id": competition_season_id}
+            )
+
+        # Add new record
+        conn.execute(
+            text(f"""
+                INSERT INTO {table_name} (competition_season_id)
+                VALUES (:competition_season_id)
+            """),
+            {"competition_season_id": competition_season_id}
+        )
+
+    return competition_season_id
+
+print(load_data_to_standings(pd.read_csv("data/transformed/transformed_standings.csv"), 2023))

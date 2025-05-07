@@ -94,10 +94,8 @@ def create_tables():
         CREATE TABLE IF NOT EXISTS matches (
             match_id SERIAL PRIMARY KEY,
             match_date TIMESTAMP NOT NULL,
-            home_team_id INTEGER NOT NULL REFERENCES teams(team_id)
-                ON DELETE CASCADE ON UPDATE CASCADE,
-            away_team_id INTEGER NOT NULL REFERENCES teams(team_id)
-                ON DELETE CASCADE ON UPDATE CASCADE,
+            home_team VARCHAR(255) NOT NULL,
+            away_team VARCHAR(255) NOT NULL,
             competition_season_id INTEGER NOT NULL REFERENCES competition_seasons(competition_season_id)
                 ON DELETE CASCADE ON UPDATE CASCADE
         )
@@ -126,6 +124,18 @@ def create_tables():
         print("Tables have been created successfully")
     except Exception as e:
         print(f"Exception while creating tables: {e}")
+
+def drop_table(table: str):
+    """This function drops table from input"""
+    engine = get_engine()
+
+    try:
+        with engine.connect() as conn:
+            conn.execute(text(f"DROP TABLE {table} CASCADE"))
+            conn.commit()
+        print(f"Table {table} have been dropped!")
+    except Exception as e:
+        print(f"Exception while dropping table: {e}")
 
 
 def read_referee_data():
@@ -169,6 +179,18 @@ def read_standings():
 
         return df
 
+def read_teams():
+    """Reads teams data from db"""
+    engine = get_engine()
+
+    with engine.connect() as conn:
+        df = pd.read_sql(
+            "SELECT * FROM teams", con=engine
+        )
+
+        return df
+
 print(read_competitions_data())    
 print(read_competition_seasons_data())
 print(read_standings())
+print(read_teams())
