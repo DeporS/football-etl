@@ -18,7 +18,7 @@ In main we can launch ETL processes.
 
 - **Extract (E) -** Extracting data from API endpoints using the functions `fetch_leagues`, `fetch_standings` and `fetch_fixtures`
 - **Transform (T) -** Transforming raw data from `.json` files into structured DataFrames, preparing them to loading into the database using functions `transform_leagues`, `transform_standings` and `transform_fixtures`
-- **Load (L) -**
+- **Load (L) -** Loading the transformed data into PostgreSQL database (running in Docker) - Check Database Structure - The data is loaded in a specific order using the following functions: `load_data_to_competitions` -> `load_data_to_competition_seasons` -> `load_data_to_standings` -> `load_data_to_teams` -> `load_data_to_team_stats` -> `load_data_to_matches` -> `load_data_to_match_stats`
 
 ## Database Structure
 
