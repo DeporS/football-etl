@@ -1,6 +1,6 @@
 from extract.extract import extract_csv_to_dataframe, load_raw_json
 from transform.transform import transform_referees_data
-from load_referees import load_data_to_referees
+from load.load_referees import load_data_to_referees
 from extract.fetch_leagues import fetch_leagues
 from extract.fetch_fixtures import fetch_fixtures
 from extract.fetch_standings import fetch_standings
@@ -42,19 +42,19 @@ def api_sports_etl(league_id: int, season: int):
     raw_fixtures = load_raw_json(f"data/raw/fixtures_{league_id}_{season}.json")
     raw_standings = load_raw_json(f"data/raw/standings_{league_id}_{season}.json")
 
-    print(transform_leagues(raw_leagues))
-    print(transform_fixtures(raw_fixtures))
-    print(transform_standings(raw_standings))
+    transform_leagues(raw_leagues).to_csv("data/transformed/transformed_leagues.csv")
+    transform_fixtures(raw_fixtures).to_csv("data/transformed/transformed_fixtures.csv")
+    transform_standings(raw_standings).to_csv("data/transformed/transformed_standings.csv")
     
     
     
 
 
 def main():
-    # api_sports_etl(39, 2023)
+    api_sports_etl(39, 2023)
     # referees_etl()
-    create_tables()
-    test_database()
+    # create_tables()
+    # test_database()
     return
 
 

@@ -1,0 +1,21 @@
+,country,league,rank,team,points,wins,draws,loses,goals_scored,goals_conceded,points_per_game,goal_difference
+0,England,Premier League,1,Manchester City,91,28,7,3,96,34,2.39,62
+1,England,Premier League,2,Arsenal,89,28,5,5,91,29,2.34,62
+2,England,Premier League,3,Liverpool,82,24,10,4,86,41,2.16,45
+3,England,Premier League,4,Aston Villa,68,20,8,10,76,61,1.79,15
+4,England,Premier League,5,Tottenham,66,20,6,12,74,61,1.74,13
+5,England,Premier League,6,Chelsea,63,18,9,11,77,63,1.66,14
+6,England,Premier League,7,Newcastle,60,18,6,14,85,62,1.58,23
+7,England,Premier League,8,Manchester United,60,18,6,14,57,58,1.58,-1
+8,England,Premier League,9,West Ham,52,14,10,14,60,74,1.37,-14
+9,England,Premier League,10,Crystal Palace,49,13,10,15,57,58,1.29,-1
+10,England,Premier League,11,Brighton,48,12,12,14,55,62,1.26,-7
+11,England,Premier League,12,Bournemouth,48,13,9,16,54,67,1.26,-13
+12,England,Premier League,13,Fulham,47,13,8,17,55,61,1.24,-6
+13,England,Premier League,14,Wolves,46,13,7,18,50,65,1.21,-15
+14,England,Premier League,15,Everton,40,13,9,16,40,51,1.05,-11
+15,England,Premier League,16,Brentford,39,10,9,19,56,65,1.03,-9
+16,England,Premier League,17,Nottingham Forest,32,9,9,20,49,67,0.84,-18
+17,England,Premier League,18,Luton,26,6,8,24,52,85,0.68,-33
+18,England,Premier League,19,Burnley,24,5,9,24,41,78,0.63,-37
+19,England,Premier League,20,Sheffield Utd,16,3,7,28,35,104,0.42,-69

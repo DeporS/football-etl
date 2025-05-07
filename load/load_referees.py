@@ -1,19 +1,11 @@
 from sqlalchemy import create_engine, text
 import pandas as pd
-
-
-# connection parameters
-host = "localhost"
-port = "5432"
-database = "postgres"
-user = "postgres"
-password = "mysecretpassword"
+from load.config.db_config import get_engine
 
 
 def load_data_to_referees(data: pd.DataFrame, table_name: str = "referees"):
-    """Loading referee data into table"""
-    engine = create_engine(
-        f"postgresql://{user}:{password}@{host}:{port}/{database}")
+    """Loading referee data into a table"""
+    engine = get_engine()
 
     with engine.connect().execution_options(isolation_level="AUTOCOMMIT") as conn:
         conn.execute(text("TRUNCATE TABLE referees"))  # clear table

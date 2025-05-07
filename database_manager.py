@@ -10,10 +10,14 @@ user = "postgres"
 password = "mysecretpassword"
 
 
+def get_engine():
+    """This function returns engine with its connection parameters"""
+    return create_engine(f"postgresql://{user}:{password}@{host}:{port}/{database}")
+
+
 def test_database():
     """Testing function"""
-    engine = create_engine(
-        f"postgresql://{user}:{password}@{host}:{port}/{database}")
+    engine = get_engine()
 
     with engine.connect() as conn:
         result = conn.execute(text(
@@ -25,8 +29,7 @@ def test_database():
 
 def create_tables():
     """Create tables in the PostgreSQL database"""
-    engine = create_engine(
-        f"postgresql://{user}:{password}@{host}:{port}/{database}")
+    engine = get_engine()
 
     commands = (
         """
@@ -126,12 +129,46 @@ def create_tables():
 
 
 def read_referee_data():
-    """Reading referee data from db"""
-    engine = create_engine(
-        f"postgresql://{user}:{password}@{host}:{port}/{database}")
+    """Reads referee data from db"""
+    engine = get_engine()
 
     with engine.connect() as conn:
         df = pd.read_sql(
-            "SELECT referee_name, avg_yellow_cards, avg_red_cards FROM referees;", con=engine)
+            "SELECT * FROM referees;", con=engine)
 
         return df
+    
+def read_competitions_data():
+    """Reads competitions data from db"""
+    engine = get_engine()
+
+    with engine.connect() as conn:
+        df = pd.read_sql(
+            "SELECT * FROM competitions;", con=engine)
+
+        return df
+
+def read_competition_seasons_data():
+    """Reads competition seasons data from db"""
+    engine = get_engine()
+
+    with engine.connect() as conn:
+        df = pd.read_sql(
+            "SELECT * FROM competition_seasons;", con=engine)
+
+        return df
+    
+def read_standings():
+    """Reads standings data from db"""
+    engine = get_engine()
+
+    with engine.connect() as conn:
+        df = pd.read_sql(
+            "SELECT * FROM standings", con=engine
+        )
+
+        return df
+
+print(read_competitions_data())    
+print(read_competition_seasons_data())
+print(read_standings())
