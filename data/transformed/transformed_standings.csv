@@ -1,4 +1,4 @@
-,country,league,rank,team,points,wins,draws,loses,goals_scored,goals_conceded,points_per_game,goal_difference
+,country,league,rank,team,points,wins,draws,losses,goals_scored,goals_conceded,points_per_game,goal_difference
 0,England,Premier League,1,Manchester City,91,28,7,3,96,34,2.39,62
 1,England,Premier League,2,Arsenal,89,28,5,5,91,29,2.34,62
 2,England,Premier League,3,Liverpool,82,24,10,4,86,41,2.16,45

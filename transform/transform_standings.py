@@ -20,7 +20,7 @@ def transform_standings(raw_data: dict) -> pd.DataFrame:
             "points": team["points"],
             "wins": team["all"]["win"],
             "draws": team["all"]["draw"],
-            "loses": team["all"]["lose"],
+            "losses": team["all"]["lose"],
             "goals_scored": team["all"]["goals"]["for"],
             "goals_conceded": team["all"]["goals"]["against"]
         }
@@ -29,7 +29,7 @@ def transform_standings(raw_data: dict) -> pd.DataFrame:
     df = pd.DataFrame(standing_teams)
 
     # additional transformations
-    df['points_per_game'] = (df['points'] / (df['wins'] + df['draws'] + df['loses'])).round(2)
+    df['points_per_game'] = (df['points'] / (df['wins'] + df['draws'] + df['losses'])).round(2)
     df['goal_difference'] = df['goals_scored'] - df['goals_conceded']
 
     return df

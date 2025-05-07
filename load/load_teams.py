@@ -19,4 +19,4 @@ def load_data_to_teams(data: pd.DataFrame, standing_id: int, table_name: str = "
                     index=False, method='multi')  # insert data from DataFrame
 
 
-load_data_to_teams(pd.read_csv("data/transformed/transformed_standings.csv"), 14)
+# load_data_to_teams(pd.read_csv("data/transformed/transformed_standings.csv"), 14)

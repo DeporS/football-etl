@@ -27,4 +27,4 @@ def load_data_to_competition_seasons(data: pd.DataFrame, table_name: str = "comp
                     index=False, method='multi')  # insert data from DataFrame
 
 
-load_data_to_competition_seasons(pd.read_csv("data/transformed/transformed_leagues.csv"))
+# load_data_to_competition_seasons(pd.read_csv("data/transformed/transformed_leagues.csv"))

@@ -50,4 +50,4 @@ def load_data_to_standings(data: pd.DataFrame, season: int, table_name: str = "s
 
     return competition_season_id
 
-print(load_data_to_standings(pd.read_csv("data/transformed/transformed_standings.csv"), 2023))
+# print(load_data_to_standings(pd.read_csv("data/transformed/transformed_standings.csv"), 2023))
