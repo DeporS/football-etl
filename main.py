@@ -60,11 +60,10 @@ def api_sports_etl(league_id: int, season: int):
 def print_database():
     read_all_tables()
 
-
 def main():
-    referees_etl()
-    api_sports_etl(39, 2023) # 39 is Premier League, 2023 season
-    print_database()
+    # referees_etl()
+    # api_sports_etl(39, 2023) # 39 is Premier League, 2023 season
+    # print_database()
     return
 
 
